@@ -41,16 +41,53 @@ const quiz=[
     answer:"Hyper text Markup Language"
 }
 ];
-// Making variables
-let currentQuestionIndex =0;
-  
-//Arrow function to show questions
-const showQuestions=() =>{
-  const questionDetails = quiz[currentQuestionIndex];
-  questionBox.textContent = questionDetails.question;
-   console.log( questionDetails);
+//Making variable
+let currentQuestionIndex = 0;
+//Arrow function to show Quuestion
+const showQuestions = () =>{
+    const questionDetails = quiz[currentQuestionIndex ];
+    questionBox.textContent = questionDetails.question;
+     
+    choicesBox.textContent = "";
+    for(let i=0;i<questionDetails.choices.length; i++){
+        const currentChoice = questionDetails.choices[i];
+        const choiceDiv = document.createElement('div');
+        choiceDiv.textContent = currentChoice;
+        choiceDiv.classList.add('choice');
+        choicesBox.appendChild(choiceDiv);
+
+        choiceDiv.addEventListener('click',() =>{
+            if(choiceDiv.classList.contains('selected')){
+                choiceDiv.classList.remove('selected');
+            }
+            else{
+                choiceDiv.classList.add('selected');
+            }
+
+    });
+    
 }
-nextBtn.addEventListener('click',()  =>{
-     showQuestions();
+
 }
-);
+
+//Function to check answers
+const checkAnswer = () => { 
+    const selectedChoice = document.querySelector('.choice.selected');
+    if(selectedChoice.textContent == quiz[currentQuestionIndex].answer){
+        alert("Correct Answer! ");
+    }
+    else{
+        alert("Wrong Answer!");
+    }
+    //console.log(selectedChoice);
+}
+showQuestions();
+nextBtn.addEventListener('click',() => {
+    checkAnswer();
+   //if(currentQuestionIndex < quiz.length){
+    //currentQuestionInde++;
+    //showQuestions();
+   //}
+});
+
+
