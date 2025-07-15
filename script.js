@@ -2,6 +2,7 @@ const conatiner = document.querySelector('.conatiner');
 const questionBox = document.querySelector('.question');
 const choicesBox = document.querySelector('.choices');
 const nextBtn = document.querySelector('.nextBtn');
+const scoreCard = document.querySelector('.scoreCard');
 
 const quiz=[
 {
@@ -43,6 +44,9 @@ const quiz=[
 ];
 //Making variable
 let currentQuestionIndex = 0;
+let score = 0;
+let quizOver = false;
+
 //Arrow function to show Quuestion
 const showQuestions = () =>{
     const questionDetails = quiz[currentQuestionIndex ];
@@ -75,19 +79,52 @@ const checkAnswer = () => {
     const selectedChoice = document.querySelector('.choice.selected');
     if(selectedChoice.textContent == quiz[currentQuestionIndex].answer){
         alert("Correct Answer! ");
+        score++;
     }
     else{
         alert("Wrong Answer!");
     }
-    //console.log(selectedChoice);
+    currentQuestionIndex++;
+     if(currentQuestionIndex < quiz.length){
+    
+    showQuestions();
+   }
+   else{
+    showScore();
+    quizOver = true;
+   }
+    
+}
+//Function to show score
+
+const showScore = () =>{
+    questionBox.textContent = "";
+choicesBox.textContent  = "";
+    scoreCard.textContent = `You Scored ${score} out of ${quiz.length}!`;
+    nextBtn.textContent = "Play Again";
+   
+        
+    
+
 }
 showQuestions();
 nextBtn.addEventListener('click',() => {
+    const selectedChoice =  document.querySelector('.choice.selected');
+    if(!selectedChoice && nextBtn.textContent == "Next"){
+        alert("Select your answer");
+        return;
+    }
+    if(quizOver){
+    nextBtn.textContent = "Next";
+  scoreCard.textContent = "";
+  currentQuestionIndex = 0;
+  showQuestions();
+  quizOver = false;
+  score = 0;
+    }
+    else{
     checkAnswer();
-   //if(currentQuestionIndex < quiz.length){
-    //currentQuestionInde++;
-    //showQuestions();
-   //}
+    }
 });
 
 
