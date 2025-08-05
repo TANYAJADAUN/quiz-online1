@@ -21,6 +21,7 @@ place-items: center;
     max-width: 850px;
     padding: 30px;
     text-align: center;
+    display: none;
 }
 
 .container h1{
@@ -53,10 +54,18 @@ place-items: center;
     text-align: left;
     width: 60%;
     cursor: pointer;
+    opacity: 0;
+    transform: translateY(50%);
+    animation: fade-in 0.5s ease forwards;
 }
 
 .choice:hover{
     background-color: #ddd;
+}
+
+.choice.selected{
+    background-color: #007bff;
+    color: #fff;
 }
 
 .btn{
@@ -77,10 +86,6 @@ place-items: center;
     background-color: #08780c;
 }
 
-.choice.selected{
-    background-color: #007bff;
-    color: #fff;
-}
 
 .scoreCard{
     font-size: 24px;
@@ -94,5 +99,77 @@ place-items: center;
     width: 100%;
     padding: 12px;
     position: absolute;
-    top: 0;
+    top: 0%;
+    display: none;
 }
+ .startBtn{
+    width: 15%;
+    padding-block: 20px;
+    text-align: center;
+ }
+ .timer{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: #08203e;
+    border: 2px solid #f00;
+    font-size: 24px;
+    font-weight: 600;
+   padding: 12px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   animation: pulse 1s ease-in-out infinite;
+ }
+   @keyframes pulse {
+    0%{
+        transform: scale(1);
+
+    }
+     50%{
+       
+        transform: scale(1.2);
+    }
+     100%{
+        
+        transform: scale(1);
+    }
+   }
+
+
+@keyframes fade-in{
+    0%{
+         opacity: 0;
+        transform: translateY(50%);
+    }
+     
+
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+ @media screen and (max-width:900px){
+    .container{
+        width: 100%;
+    margin-top: 50px;
+    }
+    .container h1{
+        font-size: 24px;
+    }
+    .container question{
+        font-size: 22px;
+    }
+    .timer{
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+ }
+ .startBtn{
+    width: 50%;
+}
+ }
